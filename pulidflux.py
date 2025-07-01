@@ -233,7 +233,9 @@ def forward_orig_flux(
 ) -> Tensor:
     if img.ndim != 3 or txt.ndim != 3:
         raise ValueError("Input img and txt tensors must have 3 dimensions.")
-
+    
+    device = comfy.model_management.get_torch_device()
+    
     # running on sequences img
     img = self.img_in(img)
     vec = self.time_in(timestep_embedding(timesteps, 256).to(img.dtype))
